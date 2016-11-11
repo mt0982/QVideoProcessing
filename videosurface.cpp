@@ -24,8 +24,7 @@ QList<QVideoFrame::PixelFormat> VideoSurface::supportedPixelFormats(
     }
 }
 
-bool VideoSurface::isFormatSupported(
-        const QVideoSurfaceFormat &format, QVideoSurfaceFormat *similar) const
+bool VideoSurface::isFormatSupported(const QVideoSurfaceFormat &format, QVideoSurfaceFormat *similar) const
 {
     Q_UNUSED(similar);
 
