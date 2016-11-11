@@ -25,3 +25,21 @@ void MainWindow::on_actionOpen_triggered()
         video->setVideo(fname);
     }
 }
+
+void MainWindow::resizeEvent(QResizeEvent *)
+{
+    //video->setWindowSize(width(), height());
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

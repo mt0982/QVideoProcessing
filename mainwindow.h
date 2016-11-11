@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QDebug>
 #include <QFileDialog>
+#include <QResizeEvent>
 #include "videowidget.h"
 
 namespace Ui {
@@ -21,6 +22,7 @@ public:
 
 private slots:
     void on_actionOpen_triggered();
+    void resizeEvent(QResizeEvent *);
 
 private:
     Ui::MainWindow *ui;

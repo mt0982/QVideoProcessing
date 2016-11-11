@@ -18,9 +18,13 @@ class VideoWidget: public QWidget {
     VideoSurface *surface;
     QLabel *label;
 
+    int width, height;
+
 public:
     explicit VideoWidget();
     ~VideoWidget();
+
+    void setWindowSize(int w, int h);
 
     /* Setters */
     void setVideo(QString path);

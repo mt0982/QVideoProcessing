@@ -3,7 +3,7 @@
 VideoWidget::VideoWidget()
 {
     /* Surface Handle | Display */
-    surface = new VideoSurface();
+    surface = new VideoSurface(this);
     connect(surface, SIGNAL(frameAvailable(QImage)), this, SLOT(processFrame(QImage)));
 
     /* Content */
@@ -12,6 +12,7 @@ VideoWidget::VideoWidget()
 
     /* Output */
     label = new QLabel;
+    label->setScaledContents(true);
     grid = new QGridLayout;
     grid->addWidget(label);
 }
@@ -21,6 +22,12 @@ VideoWidget::~VideoWidget()
     delete surface;
     delete label;
     delete surface;
+}
+
+void VideoWidget::setWindowSize(int w, int h)
+{
+    this->width = w;
+    this->height = h;
 }
 
 /* Setters */
@@ -40,6 +47,10 @@ QGridLayout *VideoWidget::getGrid() const
 void VideoWidget::processFrame(QImage image)
 {
     label->setPixmap(QPixmap::fromImage(image));
+//    label->setPixmap(QPixmap::fromImage(image).scaled(image.width()/2,
+//                                                      image.height()/2,
+//                                                      Qt::KeepAspectRatio,
+//                                                      Qt::SmoothTransformation));
 }
 
 
