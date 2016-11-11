@@ -33,7 +33,7 @@ void MainWindow::resizeEvent(QResizeEvent *)
 /* Output */
 void MainWindow::processFrame(QImage image)
 {
-    image = image.scaled(ui->label->width(), ui->label->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    image = image.scaled(ui->label->width(), ui->label->height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     ui->label->setPixmap(QPixmap::fromImage(image));
 }
 
@@ -43,6 +43,29 @@ void MainWindow::on_actionDeinterlacing_triggered(bool checked)
     qDebug() << "MainWindow::Deinterlacing():" << checked;
     video->setIsDeinterlacing(checked);
 }
+
+/* Aspect Ratio */
+void MainWindow::on_action4_3_triggered()
+{
+    int h = ui->label->height();
+    int w = (h * 4.0) / 3;
+    ui->label->resize(w,h);
+}
+
+void MainWindow::on_action16_9_triggered()
+{
+    int h = ui->label->height();
+    int w = (h * 16.0) / 9;
+    ui->label->resize(w,h);
+}
+
+void MainWindow::on_action24_10_triggered()
+{
+    int h = ui->label->height();
+    int w = h * 2.4;
+    ui->label->resize(w,h);
+}
+
 
 
 

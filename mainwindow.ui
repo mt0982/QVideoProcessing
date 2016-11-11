@@ -14,15 +14,19 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-   </layout>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>9</y>
+      <width>511</width>
+      <height>311</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -45,7 +49,22 @@
     </property>
     <addaction name="actionDeinterlacing"/>
    </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <widget class="QMenu" name="menuAspect_Ratio">
+     <property name="title">
+      <string>Aspect Ratio</string>
+     </property>
+     <addaction name="action4_3"/>
+     <addaction name="action16_9"/>
+     <addaction name="action24_10"/>
+    </widget>
+    <addaction name="menuAspect_Ratio"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
    <addaction name="menuAlgorithms"/>
   </widget>
   <action name="actionOpen">
@@ -59,6 +78,21 @@
    </property>
    <property name="text">
     <string>Deinterlacing</string>
+   </property>
+  </action>
+  <action name="action4_3">
+   <property name="text">
+    <string>4:3</string>
+   </property>
+  </action>
+  <action name="action16_9">
+   <property name="text">
+    <string>16:9</string>
+   </property>
+  </action>
+  <action name="action24_10">
+   <property name="text">
+    <string>24:10</string>
    </property>
   </action>
  </widget>
