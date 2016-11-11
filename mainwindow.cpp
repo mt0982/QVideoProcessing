@@ -27,11 +27,13 @@ void MainWindow::on_actionOpen_triggered()
 
 void MainWindow::resizeEvent(QResizeEvent *)
 {
-    ui->widget->resize(width() - 100, height() - 100);
+
 }
 
+/* Output */
 void MainWindow::processFrame(QImage image)
 {
+    image = image.scaled(ui->label->width(), ui->label->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
     ui->label->setPixmap(QPixmap::fromImage(image));
 }
 
@@ -39,6 +41,7 @@ void MainWindow::processFrame(QImage image)
 void MainWindow::on_actionDeinterlacing_triggered(bool checked)
 {
     qDebug() << "MainWindow::Deinterlacing():" << checked;
+    video->setIsDeinterlacing(checked);
 }
 
 
