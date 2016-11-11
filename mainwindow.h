@@ -23,6 +23,8 @@ public:
 private slots:
     void on_actionOpen_triggered();
     void resizeEvent(QResizeEvent *);
+    void processFrame(QImage image);
+    void on_actionDeinterlacing_triggered(bool checked);
 
 private:
     Ui::MainWindow *ui;

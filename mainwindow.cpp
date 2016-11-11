@@ -6,8 +6,7 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
     ui->setupUi(this);
 
     video = new VideoWidget;
-    ui->widget->setLayout(video->getGrid());
-    //video->setVideo("/home/asus/Wideo/BickBuckBunny.mp4");
+    connect(video, SIGNAL(getFrame(QImage)), this, SLOT(processFrame(QImage)));
 }
 
 MainWindow::~MainWindow()
@@ -28,7 +27,18 @@ void MainWindow::on_actionOpen_triggered()
 
 void MainWindow::resizeEvent(QResizeEvent *)
 {
-    //video->setWindowSize(width(), height());
+    ui->widget->resize(width() - 100, height() - 100);
+}
+
+void MainWindow::processFrame(QImage image)
+{
+    ui->label->setPixmap(QPixmap::fromImage(image));
+}
+
+/* Deinterlacing Flag */
+void MainWindow::on_actionDeinterlacing_triggered(bool checked)
+{
+    qDebug() << "MainWindow::Deinterlacing():" << checked;
 }
 
 

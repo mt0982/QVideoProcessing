@@ -14,11 +14,10 @@ class VideoWidget: public QWidget {
 
     Q_OBJECT
     QMediaPlayer *player;
-    QGridLayout *grid;
     VideoSurface *surface;
     QLabel *label;
 
-    int width, height;
+    bool isDeinterlacing;
 
 public:
     explicit VideoWidget();
@@ -28,12 +27,13 @@ public:
 
     /* Setters */
     void setVideo(QString path);
-
-    /* Getters */
-    QGridLayout *getGrid() const;
+    void setIsDeinterlacing(bool value);
 
 public slots:
     void processFrame(QImage image);
+
+signals:
+    void getFrame(QImage frame);
 };
 
 #endif // VIDEOWIDGET_H
