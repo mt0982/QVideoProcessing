@@ -5,8 +5,10 @@
 #include <QMediaPlayer>
 #include <QGridLayout>
 #include <QVideoWidget>
+#include <QVideoProbe>
 #include <QDebug>
-#include <QTimer>
+#include <QLabel>
+#include "videosurface.h"
 
 class VideoWidget: public QWidget {
 
@@ -15,10 +17,12 @@ class VideoWidget: public QWidget {
     QMediaPlayer *player;
     QVideoWidget *video;
     QGridLayout *grid;
-    QTimer timer;
+    VideoSurface *surface;
+    QLabel *label;
 
 public:
     explicit VideoWidget();
+    ~VideoWidget();
 
     /* Setters */
     void setVideo(QString path);
@@ -27,7 +31,8 @@ public:
     QGridLayout *getGrid() const;
 
 public slots:
-    void refresh();
+    void processFrame(QVideoFrame frame);
+    void processImage(QImage image);
 };
 
 #endif // VIDEOWIDGET_H
