@@ -13,9 +13,7 @@
 class VideoWidget: public QWidget {
 
     Q_OBJECT
-    QVideoProbe *probe;
     QMediaPlayer *player;
-    QVideoWidget *video;
     QGridLayout *grid;
     VideoSurface *surface;
     QLabel *label;
@@ -31,8 +29,7 @@ public:
     QGridLayout *getGrid() const;
 
 public slots:
-    void processFrame(QVideoFrame frame);
-    void processImage(QImage image);
+    void processFrame(QImage image);
 };
 
 #endif // VIDEOWIDGET_H

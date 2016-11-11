@@ -2,26 +2,18 @@
 
 VideoWidget::VideoWidget()
 {
-    player = new QMediaPlayer;
-    video = new QVideoWidget;
-
-    grid = new QGridLayout;
-    grid->addWidget(video);
-
-    /* Surface Handle */
+    /* Surface Handle | Display */
     surface = new VideoSurface();
-    connect(surface, SIGNAL(frameAvailable(QImage)), this, SLOT(processImage(QImage)));
+    connect(surface, SIGNAL(frameAvailable(QImage)), this, SLOT(processFrame(QImage)));
 
-    player->setVideoOutput(/*video*/surface);
+    /* Content */
+    player = new QMediaPlayer;
+    player->setVideoOutput(surface);
 
-
-    /* Frame Process Handle */
-    probe = new QVideoProbe;
-    probe->setSource(player);
-    connect(probe, SIGNAL(videoFrameProbed(QVideoFrame)), this, SLOT(processFrame(QVideoFrame)));
-
+    /* Output */
     label = new QLabel;
-    label->show();
+    grid = new QGridLayout;
+    grid->addWidget(label);
 }
 
 VideoWidget::~VideoWidget()
@@ -45,27 +37,7 @@ QGridLayout *VideoWidget::getGrid() const
 }
 
 /* Slots */
-void VideoWidget::processFrame(QVideoFrame frame)
-{
-//    qDebug() << frame;
-//    surface->present(frame);
-
-//    QImage img( frame.bits(),
-//                 frame.width(),
-//                 frame.height(),
-//                 frame.bytesPerLine(), QImage::Format_RGB32);
-//    qDebug() << img.size();
-
-//    if(frame.isValid()) {
-
-//        QVideoFrame copy(frame);
-//        copy.map(QAbstractVideoBuffer::ReadOnly);
-//        QImage image(copy.bits(), copy.width(), copy.height(),
-//                     QVideoFrame::imageFormatFromPixelFormat(copy.pixelFormat()));
-//    }
-}
-
-void VideoWidget::processImage(QImage image)
+void VideoWidget::processFrame(QImage image)
 {
     label->setPixmap(QPixmap::fromImage(image));
 }

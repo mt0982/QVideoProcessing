@@ -1,7 +1,5 @@
 #include "videosurface.h"
 
-//http://stackoverflow.com/questions/27829830/convert-qvideoframe-to-qimage
-
 VideoSurface::VideoSurface()
 {
 
@@ -62,7 +60,7 @@ bool VideoSurface::present(const QVideoFrame &frame)
 
 
         emit frameAvailable(image);
-        qDebug() << cloneFrame.mappedBytes() << image.size();
+        qDebug() << "VideoSurface::present()" << cloneFrame.mappedBytes() << image.size();
         cloneFrame.unmap();
         return true;
     }
