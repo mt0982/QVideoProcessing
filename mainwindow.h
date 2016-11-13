@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QFileDialog>
 #include <QResizeEvent>
+#include <QTime>
 #include "videowidget.h"
 
 namespace Ui {
