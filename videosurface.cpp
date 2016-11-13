@@ -31,9 +31,7 @@ bool VideoSurface::isFormatSupported(const QVideoSurfaceFormat &format, QVideoSu
     const QImage::Format imageFormat = QVideoFrame::imageFormatFromPixelFormat(format.pixelFormat());
     const QSize size = format.frameSize();
 
-    return imageFormat != QImage::Format_Invalid
-            && !size.isEmpty()
-            && format.handleType() == QAbstractVideoBuffer::NoHandle;
+    return imageFormat != QImage::Format_Invalid && !size.isEmpty() && format.handleType() == QAbstractVideoBuffer::NoHandle;
 }
 
 bool VideoSurface::start(const QVideoSurfaceFormat &format)
@@ -42,6 +40,7 @@ bool VideoSurface::start(const QVideoSurfaceFormat &format)
     const QSize size = format.frameSize();
 
     if (imageFormat != QImage::Format_Invalid && !size.isEmpty()) {
+
         this->imageFormat = imageFormat;
         imageSize = size;
         sourceRect = format.viewport();
@@ -50,8 +49,8 @@ bool VideoSurface::start(const QVideoSurfaceFormat &format)
 
         widget->updateGeometry();
         updateVideoRect();
-
         return true;
+
     } else {
         return false;
     }
@@ -61,37 +60,33 @@ void VideoSurface::stop()
 {
     currentFrame = QVideoFrame();
     targetRect = QRect();
-
     QAbstractVideoSurface::stop();
-
     widget->update();
 }
 
 bool VideoSurface::present(const QVideoFrame &frame)
 {
-    if (frame.isValid())
-    {
+    if (frame.isValid()) {
+
         QVideoFrame cloneFrame(frame);
         cloneFrame.map(QAbstractVideoBuffer::ReadOnly);
         const QImage image(cloneFrame.bits(),
                            cloneFrame.width(),
                            cloneFrame.height(),
-                           QVideoFrame::imageFormatFromPixelFormat(cloneFrame .pixelFormat()));
+                           QVideoFrame::imageFormatFromPixelFormat(cloneFrame.pixelFormat()));
+
         emit frameAvailable(image);
         cloneFrame.unmap();
     }
 
-    if (surfaceFormat().pixelFormat() != frame.pixelFormat()
-            || surfaceFormat().frameSize() != frame.size()) {
+    if (surfaceFormat().pixelFormat() != frame.pixelFormat() || surfaceFormat().frameSize() != frame.size()) {
         setError(IncorrectFormatError);
         stop();
-
         return false;
+
     } else {
         currentFrame = frame;
-
         widget->repaint(targetRect);
-
         return true;
     }
 }
@@ -111,21 +106,19 @@ void VideoSurface::paint(QPainter *painter)
         const QTransform oldTransform = painter->transform();
 
         if (surfaceFormat().scanLineDirection() == QVideoSurfaceFormat::BottomToTop) {
-           painter->scale(1, -1);
-           painter->translate(0, -widget->height());
+            painter->scale(1, -1);
+            painter->translate(0, -widget->height());
         }
 
         QImage image(
-                currentFrame.bits(),
-                currentFrame.width(),
-                currentFrame.height(),
-                currentFrame.bytesPerLine(),
-                imageFormat);
+                    currentFrame.bits(),
+                    currentFrame.width(),
+                    currentFrame.height(),
+                    currentFrame.bytesPerLine(),
+                    imageFormat);
 
         painter->drawImage(targetRect, image, sourceRect);
-
         painter->setTransform(oldTransform);
-
         currentFrame.unmap();
     }
 }
