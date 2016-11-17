@@ -8,7 +8,9 @@
 #include <QVideoProbe>
 #include <QDebug>
 #include <QLabel>
+#include <QStack>
 #include "videosurface.h"
+#include "bma.h"
 
 class VideoWidget: public QWidget {
 
@@ -16,6 +18,8 @@ class VideoWidget: public QWidget {
     QMediaPlayer *player;
     VideoSurface *surface;
     QLabel *label;
+    QStack<QImage> stack;
+    BMA bma;
 
     bool isDeinterlacing;
 

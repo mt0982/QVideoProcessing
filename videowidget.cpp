@@ -54,6 +54,17 @@ void VideoWidget::processFrame(QImage image)
         }
     }
 
+    /* BMA */
+    stack.push(image);
+    if(stack.size() == 2) {
+        QImage current = stack.top();
+        stack.pop();
+        QImage previous = stack.top();
+        stack.pop();
+        image = bma.getNewFrame(current, previous);     //it's new frame now
+        stack.push(current);                            //current is previous now
+    }
+
     emit getFrame(image);
 }
 

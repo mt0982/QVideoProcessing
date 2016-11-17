@@ -15,11 +15,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     videowidget.cpp \
-    videosurface.cpp
+    videosurface.cpp \
+    bma.cpp
 
 HEADERS  += mainwindow.h \
     videowidget.h \
-    videosurface.h
+    videosurface.h \
+    bma.h
 
 FORMS    += mainwindow.ui
 
