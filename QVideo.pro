@@ -22,3 +22,27 @@ HEADERS  += mainwindow.h \
     videosurface.h
 
 FORMS    += mainwindow.ui
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
