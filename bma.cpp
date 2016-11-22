@@ -35,8 +35,8 @@ QImage BMA::getNewFrame(QImage &currentFrame, QImage &previousFrame)
                 QRgb *previousRGB = (QRgb*)previousFrame.scanLine(y + k);
                 for(int l = 0; l < blockSize; l++) {
 
-                    previousFrameSum += qGray(previousRGB[x]);
-                    currentFrameSum += qGray(currentRGB[x]);
+                    previousFrameSum += qGray(previousRGB[x + l]);
+                    currentFrameSum += qGray(currentRGB[x + l]);
                 }
             }
 
@@ -49,7 +49,7 @@ QImage BMA::getNewFrame(QImage &currentFrame, QImage &previousFrame)
     QImage newFrame = calculate(blockSize, previousFrame, block);
 
     /* Elapse Time */
-    qDebug() << t.elapsed() / 1000.0f;
+    //qDebug() << t.elapsed() / 1000.0f;
 
     /* Output */
     return newFrame;
@@ -67,6 +67,7 @@ QImage BMA::calculate(int blockSize, QImage &previousFrame, QVector<QVector3D> &
         int currentFrame = block[i].y();
         int minimum = 999999;
         int newBlockIdx;
+        int diff = 0;
 
         /* Calculate Neighbors Only [3x3] */
         for(int mul = -1; mul <= 1; mul++) {
@@ -74,7 +75,7 @@ QImage BMA::calculate(int blockSize, QImage &previousFrame, QVector<QVector3D> &
             for(int step = -1; step <= 1; step++) {
 
                 /* Check First Mid (0,0) Block | Barrier */
-                if(abs(block[i].x() - currentFrame) / pow(blockSize, 2) == 0) {
+                if(abs(block[i].x() - currentFrame) == 0) {
                     minimum = abs(block[i].x() - currentFrame) / pow(blockSize, 2);
                     newBlockIdx = block[i].z();
                     break;
@@ -84,7 +85,7 @@ QImage BMA::calculate(int blockSize, QImage &previousFrame, QVector<QVector3D> &
                 if(offstet >= 0 && offstet < block.size()) {
 
                     int previousFrame = block[offstet].x();
-                    int diff = abs(previousFrame - currentFrame) / pow(blockSize, 2);
+                    diff = abs(previousFrame - currentFrame);
 
                     if(diff < minimum) {
                         minimum = diff;
