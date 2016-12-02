@@ -63,6 +63,10 @@ QPoint BMA::bestResult(QImage &searchArea, QImage &currentArea) {
     unsigned patternHeight = currentArea.height();
     int miniumum = 987645;
 
+    /* Barrier */
+    QImage areaRect = area(searchArea, QPoint(radius, radius + patternHeight), QPoint(radius, radius + patternWidth));
+    if(absdiff(areaRect, currentArea) == 0) return QPoint(radius, radius);
+
     for (int y = 0; y + patternHeight < areaHeight; y++) {
         for (int x = 0; x + patternWidth < areaWidth; x++) {
 
