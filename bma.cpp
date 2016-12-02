@@ -132,10 +132,10 @@ QImage BMA::getNewFrame(QImage &currentFrame, QImage &previousFrame)
             reconstruct(newFrame, optimalBlock, y, x);
 
             /* Show Move Vectors */
-//            if(best.y() != 0 && best.x() != 0) {
-//                #pragma omp critical
-//                showMoveVectors(newFrame, x, y, radius * 2, x + best.rx(), y + best.ry());
-//            }
+            if(best.y() != 0 && best.x() != 0) {
+                #pragma omp critical
+                showMoveVectors(newFrame, x, y, radius * 2, x + best.rx(), y + best.ry());
+            }
         }
     }
 

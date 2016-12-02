@@ -14,7 +14,7 @@
 
 class BMA {
 private:
-    const int blockSize = 8;
+    const int blockSize = 40;
     const int radius = 8;
 
 public:
