@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui multimedia multimediawidgets
+QT       += core gui multimedia multimediawidgets widgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,7 +25,8 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui
 
-
+QMAKE_CXXFLAGS += -fopenmp
+LIBS += -fopenmp
 
 
 
