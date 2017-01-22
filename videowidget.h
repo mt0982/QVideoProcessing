@@ -21,7 +21,8 @@ class VideoWidget: public QWidget {
     QStack<QImage> stack;
     BMA bma;
 
-    bool isDeinterlacing;
+    bool isDeinterlacingChecked;
+    bool isMotionEstimationChecked;
 
 public:
     explicit VideoWidget();
@@ -32,6 +33,7 @@ public:
     /* Setters */
     void setVideo(QString path);
     void setIsDeinterlacing(bool value);
+    void setIsMotionEstimation(bool value);
 
 public slots:
     void processFrame(QImage image);

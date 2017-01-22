@@ -26,6 +26,7 @@ private slots:
     void resizeEvent(QResizeEvent *);
     void processFrame(QImage image);
     void on_actionDeinterlacing_triggered(bool checked);
+    void on_actionMotion_Estimation_toggled(bool checked);
     void on_action4_3_triggered();
     void on_action16_9_triggered();
     void on_action24_10_triggered();

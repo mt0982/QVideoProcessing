@@ -44,6 +44,7 @@
      <string>Algorithms</string>
     </property>
     <addaction name="actionDeinterlacing"/>
+    <addaction name="actionMotion_Estimation"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
@@ -89,6 +90,14 @@
   <action name="action24_10">
    <property name="text">
     <string>24:10</string>
+   </property>
+  </action>
+  <action name="actionMotion_Estimation">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Motion Estimation</string>
    </property>
   </action>
  </widget>

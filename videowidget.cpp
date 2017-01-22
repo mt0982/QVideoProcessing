@@ -1,6 +1,6 @@
 #include "videowidget.h"
 
-VideoWidget::VideoWidget(): isDeinterlacing(false)
+VideoWidget::VideoWidget(): isDeinterlacingChecked(false), isMotionEstimationChecked(false)
 {
     /* Surface Handle | Display */
     surface = new VideoSurface(this);
@@ -26,14 +26,19 @@ void VideoWidget::setVideo(QString path)
 
 void VideoWidget::setIsDeinterlacing(bool value)
 {
-    isDeinterlacing = value;
+    isDeinterlacingChecked = value;
+}
+
+void VideoWidget::setIsMotionEstimation(bool value)
+{
+    isMotionEstimationChecked = value;
 }
 
 /* Slots */
 void VideoWidget::processFrame(QImage image)
 {
     /* For Each Odd Line | Deinterlacing */
-    if(isDeinterlacing) {
+    if(isDeinterlacingChecked) {
 
         for(int y = 1; y < image.height() - 1; y += 2) {
             QRgb *previous = (QRgb*)image.scanLine(y-1);
@@ -55,14 +60,16 @@ void VideoWidget::processFrame(QImage image)
     }
 
     /* BMA */
-    stack.push(image);
-    if(stack.size() == 2) {
-        QImage current = stack.top();
-        stack.pop();
-        QImage previous = stack.top();
-        stack.pop();
-        image = bma.getNewFrame(current, previous);     //it's new frame now
-        stack.push(current);                            //current is previous now
+    if(isMotionEstimationChecked) {
+        stack.push(image);
+        if(stack.size() == 2) {
+            QImage current = stack.top();
+            stack.pop();
+            QImage previous = stack.top();
+            stack.pop();
+            image = bma.getNewFrame(current, previous);     //it's new frame now
+            stack.push(current);                            //current is previous now
+        }
     }
 
     emit getFrame(image);

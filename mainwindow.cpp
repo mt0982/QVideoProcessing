@@ -46,6 +46,12 @@ void MainWindow::on_actionDeinterlacing_triggered(bool checked)
     video->setIsDeinterlacing(checked);
 }
 
+void MainWindow::on_actionMotion_Estimation_toggled(bool checked)
+{
+    qDebug() << "MainWindow::Motion Estimation():" << checked;
+    video->setIsMotionEstimation(checked);
+}
+
 /* Aspect Ratio */
 void MainWindow::on_action4_3_triggered()
 {
@@ -67,6 +73,7 @@ void MainWindow::on_action24_10_triggered()
     int w = h * 2.4;
     ui->label->resize(w,h);
 }
+
 
 
 
