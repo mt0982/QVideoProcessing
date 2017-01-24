@@ -31,6 +31,8 @@ private slots:
     void on_action16_9_triggered();
     void on_action24_10_triggered();
 
+    void on_actionInterlacing_triggered(bool checked);
+
 private:
     Ui::MainWindow *ui;
 };

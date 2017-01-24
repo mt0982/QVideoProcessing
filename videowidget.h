@@ -11,6 +11,7 @@
 #include <QStack>
 #include "videosurface.h"
 #include "bma.h"
+#include "interlacing.h"
 
 class VideoWidget: public QWidget {
 
@@ -20,9 +21,11 @@ class VideoWidget: public QWidget {
     QLabel *label;
     QStack<QImage> stack;
     BMA bma;
+    Interlacing interlacing;
 
     bool isDeinterlacingChecked;
     bool isMotionEstimationChecked;
+    bool isInterlacing;
 
 public:
     explicit VideoWidget();
@@ -34,6 +37,7 @@ public:
     void setVideo(QString path);
     void setIsDeinterlacing(bool value);
     void setIsMotionEstimation(bool value);
+    void setIsInterlacing(bool value);
 
 public slots:
     void processFrame(QImage image);

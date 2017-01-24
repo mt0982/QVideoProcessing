@@ -33,10 +33,8 @@ void MainWindow::resizeEvent(QResizeEvent *)
 /* Output */
 void MainWindow::processFrame(QImage image)
 {
-    //QTime t; t.start();
     image = image.scaled(ui->label->width(), ui->label->height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     ui->label->setPixmap(QPixmap::fromImage(image));
-    //qDebug() << t.elapsed() / 1000.0 << image.size();
 }
 
 /* Deinterlacing Flag */
@@ -50,6 +48,12 @@ void MainWindow::on_actionMotion_Estimation_toggled(bool checked)
 {
     qDebug() << "MainWindow::Motion Estimation():" << checked;
     video->setIsMotionEstimation(checked);
+}
+
+void MainWindow::on_actionInterlacing_triggered(bool checked)
+{
+    qDebug() << "MainWindow::Interlacing:" << checked;
+    video->setIsInterlacing(checked);
 }
 
 /* Aspect Ratio */
@@ -73,6 +77,7 @@ void MainWindow::on_action24_10_triggered()
     int w = h * 2.4;
     ui->label->resize(w,h);
 }
+
 
 
 

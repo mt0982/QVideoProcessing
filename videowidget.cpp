@@ -34,6 +34,11 @@ void VideoWidget::setIsMotionEstimation(bool value)
     isMotionEstimationChecked = value;
 }
 
+void VideoWidget::setIsInterlacing(bool value)
+{
+    isInterlacing = value;
+}
+
 /* Slots */
 void VideoWidget::processFrame(QImage image)
 {
@@ -70,6 +75,11 @@ void VideoWidget::processFrame(QImage image)
             image = bma.getNewFrame(current, previous);     //it's new frame now
             stack.push(current);                            //current is previous now
         }
+    }
+
+    /* Interlacing */
+    if(isInterlacing) {
+        image = interlacing.process(image);
     }
 
     emit getFrame(image);

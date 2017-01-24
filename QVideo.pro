@@ -16,12 +16,14 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     videowidget.cpp \
     videosurface.cpp \
-    bma.cpp
+    bma.cpp \
+    interlacing.cpp
 
 HEADERS  += mainwindow.h \
     videowidget.h \
     videosurface.h \
-    bma.h
+    bma.h \
+    interlacing.h
 
 FORMS    += mainwindow.ui
 
